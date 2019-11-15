@@ -1,0 +1,28 @@
+{
+  "name": "undgrnd-difference-calculator",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "bin": {
+    "hexlet": "dist/bin/gendiff.js"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production babel src --out-dir dist",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/undgrnd/frontend-project-lvl2.git"
+  },
+  "author": "Yuri Mikhin",
+  "devDependencies": {
+    "@babel/cli": "7.7.0",
+    "@babel/core": "7.7.2",
+    "@babel/node": "7.7.0",
+    "@babel/preset-env": "7.7.1",
+    "babel-eslint": "10.0.3",
+    "eslint": "6.6.0",
+    "eslint-config-airbnb-base": "14.0.0",
+    "eslint-plugin-babel": "5.3.0",
+    "eslint-plugin-import": "2.18.2"
+  }
+}
