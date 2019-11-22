@@ -1,10 +1,7 @@
-install: install-deps
+install: npm install
 
 run:
-	npx babel-node src/bin/gendiff.js
-
-install-deps:
-	npm install
+	npx babel-node src/bin/gendiff.js before.json after.json
 
 build:
 	rm -rf dist
@@ -12,8 +9,3 @@ build:
 
 lint:
 	npx eslint .
-
-publish:
-	npm publish
-
-.PHONY: test
