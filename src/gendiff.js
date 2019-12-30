@@ -1,3 +1,5 @@
+import jsonToString from './json-to-string';
+
 const fs = require('fs');
 
 export default (pathToFile1, pathToFile2) => {
@@ -15,7 +17,7 @@ export default (pathToFile1, pathToFile2) => {
     return acc;
   }, []);
 
-  return Object.keys(file1).reduce((acc, property) => {
+  const diff = Object.keys(file1).reduce((acc, property) => {
     if (!file2[property] || file2[property] !== file1[property]) {
       return [...acc, {
         action: 'deleted',
@@ -34,4 +36,6 @@ export default (pathToFile1, pathToFile2) => {
   }, onlyNewProperties)
   // eslint-disable-next-line no-nested-ternary
     .sort((a, b) => ((a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)));
+
+  return jsonToString(diff);
 };
