@@ -9,3 +9,7 @@ build:
 
 lint:
 	npx eslint .
+
+test:
+	npm run lint:js
+	npm run test
