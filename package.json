@@ -1,6 +1,6 @@
 {
   "name": "undgrnd-difference-calculator",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "bin": {
     "undgrnd-difference-calculator": "dist/bin/gendiff.js"
