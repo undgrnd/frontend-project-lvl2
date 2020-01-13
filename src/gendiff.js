@@ -1,10 +1,9 @@
 import jsonToString from './json-to-string';
-
-const fs = require('fs');
+import parser from './parser';
 
 export default (pathToFile1, pathToFile2) => {
-  const file1 = JSON.parse(fs.readFileSync(pathToFile1).toString());
-  const file2 = JSON.parse(fs.readFileSync(pathToFile2).toString());
+  const file1 = parser(pathToFile1);
+  const file2 = parser(pathToFile2);
 
   const onlyNewProperties = Object.keys(file2).reduce((acc, property) => {
     if (!file1[property] || file2[property] !== file1[property]) {
