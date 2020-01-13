@@ -24,6 +24,5 @@ export default (json) => {
   }
 
   const string = json.map((prop) => `${getMathSignLiteral(prop.action)} ${prop.name}: ${prop.value}\n`).join('');
-  console.log(`{\n${string}\n}`);
   return `{\n${string}}`;
 };
