@@ -1,7 +1,7 @@
-import gendiff from '../gendiff';
+import gendiff from '../src/gendiff';
 
-const before = './src/test/__fixtures__/hexlet-request-before.json';
-const after = './src/test/__fixtures__/hexlet-request-after.json';
+const before = './test/__fixtures__/hexlet-request-before.yml';
+const after = './test/__fixtures__/hexlet-request-after.yml';
 
 const expectedResult = `{
 - follow: false
