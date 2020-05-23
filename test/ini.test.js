@@ -1,7 +1,7 @@
 import gendiff from '../src/gendiff';
 
-const before = './test/__fixtures__/hexlet-request-before.json';
-const after = './test/__fixtures__/hexlet-request-after.json';
+const before = './test/__fixtures__/before.ini';
+const after = './test/__fixtures__/after.ini';
 
 const expectedResult = `{
 - follow: false
@@ -12,6 +12,6 @@ const expectedResult = `{
 + verbose: true
 }`;
 
-test('Hexlet request', () => {
+test('Ini', () => {
   expect(gendiff(before, after)).toStrictEqual(expectedResult);
 });
