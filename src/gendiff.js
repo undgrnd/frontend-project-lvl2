@@ -1,40 +1,88 @@
+import isEqual from 'lodash/isEqual';
 import jsonToString from './json-to-string';
 import parser from './parser';
 
-export default (pathToFile1, pathToFile2) => {
-  const file1 = parser(pathToFile1);
-  const file2 = parser(pathToFile2);
+const isObject = (entity) => typeof entity === 'object' && entity !== null;
 
-  const onlyNewProperties = Object.keys(file2).reduce((acc, property) => {
-    if (!file1[property] || file2[property] !== file1[property]) {
-      return [...acc, {
-        action: 'added',
-        name: property,
-        value: file2[property],
-      }];
-    }
-    return acc;
-  }, []);
+const getModifiedPropDescription = (after, before, propName) => [
+  {
+    action: 'added',
+    name: propName,
+    value: after[propName],
+  },
+  {
+    action: 'deleted',
+    name: propName,
+    value: before[propName],
+  },
+];
 
-  const diff = Object.keys(file1).reduce((acc, property) => {
-    if (!file2[property] || file2[property] !== file1[property]) {
+const getNotModifiedPropDescription = (after, propName) => ({
+  action: 'not modified',
+  name: propName,
+  value: after[propName],
+});
+
+const getAddedPropDescription = (after, propName) => ({
+  action: 'added',
+  name: propName,
+  value: after[propName],
+});
+
+const getDeletedPropDescription = (before, propName) => ({
+  action: 'deleted',
+  name: propName,
+  value: before[propName],
+});
+
+const getDiff = (before, after) => {
+  const afterProps = Object.keys(after);
+  const beforeProps = Object.keys(before);
+
+  // 2. Проп удален
+  const deletedProps = beforeProps
+    .filter((beforeProp) => !(beforeProp in after))
+    .map((beforeProp) => getDeletedPropDescription(before, beforeProp));
+
+  return afterProps.reduce((acc, afterPropName) => {
+    const afterPropValue = after[afterPropName];
+    const beforePropValue = before[afterPropName];
+
+    // 1. Проп добавлен
+    if (!(afterPropName in before)) {
+      return [...acc, getAddedPropDescription(after, afterPropName)];
+    }
+
+    // 3. Проп не изменен
+    if (isEqual(afterPropValue, beforePropValue)) {
+      return [...acc, getNotModifiedPropDescription(after, afterPropName)];
+    }
+
+    // 5. Пропы объект и изменен
+    if (isObject(afterPropValue) && isObject(beforePropValue)) {
       return [...acc, {
-        action: 'deleted',
-        name: property,
-        value: file1[property],
+        action: 'object modified',
+        name: afterPropName,
+        value: getDiff(afterPropValue, beforePropValue),
       }];
     }
-    if (file2[property] === file1[property]) {
-      return [...acc, {
-        action: 'not changed',
-        name: property,
-        value: file1[property],
-      }];
-    }
-    return acc;
-  }, onlyNewProperties)
-  // eslint-disable-next-line no-nested-ternary
-    .sort((a, b) => ((a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)));
+
+    // 4. Проп не объект и изменен
+    return [...acc, ...getModifiedPropDescription(after, before, afterPropName)];
+  }, deletedProps);
+};
+
+export default (beforePath, afterPath) => {
+  const before = parser(beforePath);
+  const after = parser(afterPath);
+
+  const diff = getDiff(before, after);
 
   return jsonToString(diff);
 };
+
+// 1. Проп добавлен
+// 2. Проп удален
+// 3. Проп не изменен
+// 4. Проп не объект и изменен
+// 5. Проп объект и изменен
