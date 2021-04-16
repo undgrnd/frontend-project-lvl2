@@ -10,7 +10,10 @@ const showDifference = (firstFilePath, secondFilePath) => {
   const firstFileContentJson = JSON.parse(firstFileContent);
   const secondFileContentJson = JSON.parse(secondFileContent);
 
-  return process.stdout.write(formatOutput(getDifference(firstFileContentJson, secondFileContentJson)));
-}
+  return process.stdout.write(formatOutput(getDifference(
+    firstFileContentJson,
+    secondFileContentJson,
+  )));
+};
 
 module.exports = showDifference;

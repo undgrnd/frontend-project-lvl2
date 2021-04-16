@@ -34,7 +34,12 @@ const getDifference = (before, after) => {
     // Prop is modified object
     if (isObject(afterPropValue) && isObject(beforePropValue)) {
       return [...acc,
-        getObjectModifiedPropDescription(afterPropName, afterPropValue, beforePropValue, getDifference),
+        getObjectModifiedPropDescription(
+          afterPropName,
+          afterPropValue,
+          beforePropValue,
+          getDifference,
+        ),
       ];
     }
 

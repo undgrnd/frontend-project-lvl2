@@ -30,7 +30,7 @@ const getDifferenceReportAsString = (report, deepLevel = 0) => {
         value = prop.value;
     }
 
-    return `${nestingPushingCharacters}${sign} ${prop.name}: ${value}${os.EOL}`
+    return `${nestingPushingCharacters}${sign} ${prop.name}: ${value}${os.EOL}`;
   });
 
   return `{${os.EOL}${string.join('')}${nestingPushingCharacters}}`;
