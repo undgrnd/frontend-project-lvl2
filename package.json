@@ -4,8 +4,8 @@
   "description": "Compares two configuration files and shows a difference.",
   "main": "./src/show-difference.js",
   "scripts": {
-    "test": "npm run test",
-    "lint:js": "eslint ./ --fix"
+    "lint:js": "eslint ./ --fix",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,8 @@
   "devDependencies": {
     "eslint": "7.24.0",
     "eslint-config-airbnb-base": "14.2.1",
-    "eslint-plugin-import": "2.22.1"
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jest": "24.3.5",
+    "jest": "26.6.3"
   }
 }
