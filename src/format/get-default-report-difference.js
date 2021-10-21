@@ -3,7 +3,7 @@ const os = require('os');
 const isObject = require('../helpers/is-object');
 const getDifferenceSign = require('./get-difference-sign');
 
-const getDifferenceReportAsString = (report, deepLevel = 0) => {
+const getDefaultReportDifference = (report, deepLevel = 0) => {
   if (!report) {
     return '';
   }
@@ -18,7 +18,7 @@ const getDifferenceReportAsString = (report, deepLevel = 0) => {
 
     switch (valueType) {
       case 'array':
-        value = getDifferenceReportAsString(prop.value, deepLevel + 1);
+        value = getDefaultReportDifference(prop.value, deepLevel + 1);
         break;
       case 'object':
         value = JSON.stringify(prop.value);
@@ -36,4 +36,4 @@ const getDifferenceReportAsString = (report, deepLevel = 0) => {
   return `{${os.EOL}${string.join('')}${nestingPushingCharacters}}`;
 };
 
-module.exports = getDifferenceReportAsString;
+module.exports = getDefaultReportDifference;

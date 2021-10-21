@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const getDifference = require('./get-difference');
-const formatOutput = require('./format/get-difference-report-as-string');
+const formatOutput = require('./format/get-default-report-difference');
 
 const showDifference = (firstFilePath, secondFilePath) => {
   const firstFileContent = fs.readFileSync(firstFilePath, 'utf8');
