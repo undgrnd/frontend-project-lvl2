@@ -14,7 +14,7 @@ const getDifference = (before, after) => {
 
   // Prop was deleted
   const deletedProps = beforeProps
-    .filter((beforeProp) => !(beforeProp in after))
+    .filter((beforeProp) => !Object.getOwnPropertyDescriptor(after, beforeProp))
     .map((beforeProp) => getDeletedPropDescription(before, beforeProp));
 
   return afterProps.reduce((acc, afterPropName) => {
@@ -22,7 +22,7 @@ const getDifference = (before, after) => {
     const beforePropValue = before[afterPropName];
 
     // Prop was added
-    if (!(afterPropName in before)) {
+    if (!Object.getOwnPropertyDescriptor(before, afterPropName)) {
       return [...acc, getAddedPropDescription(after, afterPropName)];
     }
 
