@@ -8,43 +8,43 @@ const getModifiedPropDescription = require('./description-creators/get-modified-
 const getNotModifiedPropDescription = require('./description-creators/get-not-modified-prop-description');
 const getObjectModifiedPropDescription = require('./description-creators/get-object-modified-prop-description');
 
-const getDifference = (before, after) => {
-  const afterProps = Object.keys(after);
-  const beforeProps = Object.keys(before);
+const getDifference = (firstObject, secondObject) => {
+  const firstObjectProps = Object.keys(firstObject);
+  const secondObjectProps = Object.keys(secondObject);
 
   // Prop was deleted
-  const deletedProps = beforeProps
-    .filter((beforeProp) => !Object.getOwnPropertyDescriptor(after, beforeProp))
-    .map((beforeProp) => getDeletedPropDescription(before, beforeProp));
+  const deletedProps = firstObjectProps
+    .filter((firstObjectProp) => !Object.getOwnPropertyDescriptor(secondObject, firstObjectProp))
+    .map((firstObjectProp) => getDeletedPropDescription(firstObject, firstObjectProp));
 
-  return afterProps.reduce((acc, afterPropName) => {
-    const afterPropValue = after[afterPropName];
-    const beforePropValue = before[afterPropName];
+  return secondObjectProps.reduce((acc, secondObjectPropName) => {
+    const secondObjectPropValue = secondObject[secondObjectPropName];
+    const firstObjectPropValue = firstObject[secondObjectPropName];
 
     // Prop was added
-    if (!Object.getOwnPropertyDescriptor(before, afterPropName)) {
-      return [...acc, getAddedPropDescription(after, afterPropName)];
+    if (!Object.getOwnPropertyDescriptor(firstObject, secondObjectPropName)) {
+      return [...acc, getAddedPropDescription(secondObject, secondObjectPropName)];
     }
 
     // Prop has not been changed
-    if (isEqual(afterPropValue, beforePropValue)) {
-      return [...acc, getNotModifiedPropDescription(after, afterPropName)];
+    if (isEqual(secondObjectPropValue, firstObjectPropValue)) {
+      return [...acc, getNotModifiedPropDescription(secondObject, secondObjectPropName)];
     }
 
     // Prop is modified object
-    if (isObject(afterPropValue) && isObject(beforePropValue)) {
+    if (isObject(secondObjectPropValue) && isObject(firstObjectPropValue)) {
       return [...acc,
         getObjectModifiedPropDescription(
-          afterPropName,
-          afterPropValue,
-          beforePropValue,
+          secondObjectPropName,
+          secondObjectPropValue,
+          firstObjectPropValue,
           getDifference,
         ),
       ];
     }
 
     // Prop is modified object
-    return [...acc, ...getModifiedPropDescription(after, before, afterPropName)];
+    return [...acc, ...getModifiedPropDescription(secondObject, firstObject, secondObjectPropName)];
   }, deletedProps);
 };
 
