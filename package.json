@@ -8,7 +8,7 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "start": "./src/bin/gendiff.js",
-    "start:demo": "./src/bin/gendiff.js -f json  ./test/__fixtures__/before-nesting.json ./test/__fixtures__/after-nesting.json"
+    "start:demo": "./src/bin/gendiff.js -f plain  ./test/__fixtures__/before-nesting.yml ./test/__fixtures__/after-nesting.yml"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   "homepage": "https://github.com/undgrnd/frontend-project-lvl2#readme",
   "dependencies": {
     "commander": "7.2.0",
+    "js-yaml": "3.14.1",
     "lodash": "4.17.21",
     "safe-stable-stringify": "2.3.1"
   },
