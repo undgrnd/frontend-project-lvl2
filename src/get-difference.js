@@ -1,6 +1,6 @@
 const isEqual = require('lodash/isEqual');
 
-const isObject = require('./helpers/is-object');
+const { isObject } = require('./utils');
 
 const getAddedPropDescription = require('./description-creators/get-added-prop-description');
 const getDeletedPropDescription = require('./description-creators/get-deleted-prop-description');
@@ -43,7 +43,7 @@ const getDifference = (firstObject, secondObject) => {
       ];
     }
 
-    // Prop is modified object
+    // Prop is modified
     return [...acc, ...getModifiedPropDescription(secondObject, firstObject, secondObjectPropName)];
   }, deletedProps);
 };

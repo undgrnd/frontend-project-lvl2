@@ -10,7 +10,7 @@ const init = () => program
   .option('-f, --format [type]', 'output format')
   .arguments('<firstConfigPath> <secondConfigPath>')
   .action((firstFile, secondFile) => {
-    showDifference(firstFile, secondFile);
+    showDifference(firstFile, secondFile, program.opts().format);
   })
   .parse(process.argv);
 

@@ -1,5 +1,5 @@
 const getDifference = require('../src/get-difference');
-const getDifferenceReportAsString = require('../src/format/get-default-report-difference');
+const getDefaultReportDifference = require('../src/format/get-default-report-difference');
 
 const before = require('./__fixtures__/before-nesting.json');
 const after = require('./__fixtures__/after-nesting.json');
@@ -29,7 +29,7 @@ const result = '{\n'
   + '+ group3: {"fee":100500}\n'
   + '}';
 
-test('Get difference in nesting structures', () => {
-  expect(getDifferenceReportAsString(getDifference(before, after)))
+test('Show difference as tree-structure', () => {
+  expect(getDefaultReportDifference(getDifference(before, after)))
     .toEqual(result);
 });

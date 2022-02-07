@@ -1,7 +1,7 @@
 const os = require('os');
 
-const isObject = require('../helpers/is-object');
-const getDifferenceSign = require('./get-difference-sign');
+const { isObject } = require('../utils');
+const { getActionSign } = require('./utils');
 
 const getDefaultReportDifference = (report, deepLevel = 0) => {
   if (!report) {
@@ -10,30 +10,29 @@ const getDefaultReportDifference = (report, deepLevel = 0) => {
 
   const nestingPushingCharacters = '  '.repeat(deepLevel);
 
-  const string = report.map((prop) => {
-    const sign = getDifferenceSign(prop.action);
+  const stringsList = report
+    .filter((prop) => prop.action !== 'modified')
+    .map((prop) => {
+      const sign = getActionSign(prop.action);
 
-    const valueType = (Array.isArray(prop.value) && 'array') || (isObject(prop.value) && 'object') || 'primitive';
-    let value;
+      const valueType = (Array.isArray(prop.value) && 'array') || (isObject(prop.value) && 'object') || 'primitive';
+      let value;
 
-    switch (valueType) {
-      case 'array':
-        value = getDefaultReportDifference(prop.value, deepLevel + 1);
-        break;
-      case 'object':
-        value = JSON.stringify(prop.value);
-        break;
-      case 'primitive':
-        value = prop.value;
-        break;
-      default:
-        value = prop.value;
-    }
+      switch (valueType) {
+        case 'array':
+          value = getDefaultReportDifference(prop.value, deepLevel + 1);
+          break;
+        case 'object':
+          value = JSON.stringify(prop.value);
+          break;
+        default:
+          value = prop.value;
+      }
 
-    return `${nestingPushingCharacters}${sign} ${prop.name}: ${value}${os.EOL}`;
-  });
+      return `${nestingPushingCharacters}${sign} ${prop.name}: ${value}${os.EOL}`;
+    });
 
-  return `{${os.EOL}${string.join('')}${nestingPushingCharacters}}`;
+  return `{${os.EOL}${stringsList.join('')}${nestingPushingCharacters}}`;
 };
 
 module.exports = getDefaultReportDifference;

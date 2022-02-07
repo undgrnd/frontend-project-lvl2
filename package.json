@@ -7,7 +7,8 @@
     "lint:js": "eslint ./ --fix",
     "test": "jest",
     "coverage": "jest --coverage",
-    "start": "./src/bin/gendiff.js"
+    "start": "./src/bin/gendiff.js",
+    "start:demo": "./src/bin/gendiff.js -f plain  ./test/__fixtures__/before-nesting.json ./test/__fixtures__/after-nesting.json"
   },
   "repository": {
     "type": "git",

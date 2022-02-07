@@ -26,16 +26,24 @@
         "value": "Value 1"
       },
       {
-        "action": "added",
+        "action": "added while modifying",
         "name": "setting3",
         "value": {
           "key": "value"
         }
       },
       {
-        "action": "deleted",
+        "action": "deleted while modifying",
         "name": "setting3",
         "value": true
+      },
+      {
+        "action": "modified",
+        "name": "setting3",
+        "value": {
+          "key": "value"
+        },
+        "oldValue": true
       },
       {
         "action": "added",
@@ -77,24 +85,38 @@
         "value": "bar"
       },
       {
-        "action": "added",
+        "action": "added while modifying",
         "name": "baz",
         "value": "bars"
       },
       {
-        "action": "deleted",
+        "action": "deleted while modifying",
         "name": "baz",
         "value": "bas"
       },
       {
-        "action": "added",
+        "action": "modified",
+        "name": "baz",
+        "value": "bars",
+        "oldValue": "bas"
+      },
+      {
+        "action": "added while modifying",
         "name": "nest",
         "value": "str"
       },
       {
-        "action": "deleted",
+        "action": "deleted while modifying",
         "name": "nest",
         "value": {
+          "key": "value"
+        }
+      },
+      {
+        "action": "modified",
+        "name": "nest",
+        "value": "str",
+        "oldValue": {
           "key": "value"
         }
       }
