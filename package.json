@@ -6,7 +6,8 @@
   "scripts": {
     "lint:js": "eslint ./ --fix",
     "test": "jest",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "start": "./src/bin/gendiff.js"
   },
   "repository": {
     "type": "git",
