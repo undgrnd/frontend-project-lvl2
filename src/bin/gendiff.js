@@ -8,7 +8,7 @@ const init = () => program
   .version(packageJSON.version)
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'output format')
-  .arguments('<firstConfig> <secondConfig>')
+  .arguments('<firstConfigPath> <secondConfigPath>')
   .action((firstFile, secondFile) => {
     showDifference(firstFile, secondFile);
   })
