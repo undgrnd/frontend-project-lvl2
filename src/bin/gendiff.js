@@ -2,7 +2,7 @@
 
 const program = require('commander');
 const packageJSON = require('../../package.json');
-const { genDiff } = require('../lib');
+const genDiff = require('../lib');
 
 const init = () => program
   .version(packageJSON.version)

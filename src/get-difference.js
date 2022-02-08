@@ -10,13 +10,16 @@ const {
   getObjectModifiedPropDescription,
 } = require('./prop-actions-descriptions');
 
+const sortAlphabetically = (a, b) => a.name.localeCompare(b.name);
+
 const getDifference = (firstObject, secondObject) => {
   const firstObjectProps = Object.keys(firstObject);
   const secondObjectProps = Object.keys(secondObject);
 
   const deletedProps = firstObjectProps
     .filter((firstObjectProp) => !Object.getOwnPropertyDescriptor(secondObject, firstObjectProp))
-    .map((firstObjectProp) => getDeletedPropDescription(firstObject, firstObjectProp));
+    .map((firstObjectProp) => getDeletedPropDescription(firstObject, firstObjectProp))
+    .sort(sortAlphabetically);
 
   return secondObjectProps.reduce((acc, secondObjectPropName) => {
     const secondObjectPropValue = secondObject[secondObjectPropName];
@@ -50,7 +53,7 @@ const getDifference = (firstObject, secondObject) => {
 
     // Prop is modified
     return [...acc, ...getModifiedPropDescription(secondObject, firstObject, secondObjectPropName)];
-  }, deletedProps);
+  }, deletedProps).sort(sortAlphabetically);
 };
 
 module.exports = { getDifference };

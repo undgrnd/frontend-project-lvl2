@@ -1,20 +1,8 @@
 [
   {
-    "action": "deleted",
-    "name": "group2",
-    "value": {
-      "abc": 12345
-    }
-  },
-  {
     "action": "object modified",
     "name": "common",
     "value": [
-      {
-        "action": "deleted",
-        "name": "setting2",
-        "value": 200
-      },
       {
         "action": "added",
         "name": "follow",
@@ -24,6 +12,11 @@
         "action": "not modified",
         "name": "setting1",
         "value": "Value 1"
+      },
+      {
+        "action": "deleted",
+        "name": "setting2",
+        "value": 200
       },
       {
         "action": "added while modifying",
@@ -80,11 +73,6 @@
     "name": "group1",
     "value": [
       {
-        "action": "not modified",
-        "name": "foo",
-        "value": "bar"
-      },
-      {
         "action": "added while modifying",
         "name": "baz",
         "value": "bars"
@@ -99,6 +87,11 @@
         "name": "baz",
         "value": "bars",
         "oldValue": "bas"
+      },
+      {
+        "action": "not modified",
+        "name": "foo",
+        "value": "bar"
       },
       {
         "action": "added while modifying",
@@ -121,6 +114,13 @@
         }
       }
     ]
+  },
+  {
+    "action": "deleted",
+    "name": "group2",
+    "value": {
+      "abc": 12345
+    }
   },
   {
     "action": "added",
