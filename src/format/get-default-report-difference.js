@@ -29,10 +29,13 @@ const getDefaultReportDifference = (report, deepLevel = 1) => {
           value = prop.value;
       }
 
-      return `${nestingPushingCharacters}${sign} ${prop.name}: ${value}${os.EOL}`;
+      const pushingCharacters = nestingPushingCharacters.substr(0, nestingPushingCharacters.length - 2);
+
+      return `${pushingCharacters}${sign} ${prop.name}: ${value}${os.EOL}`;
     });
 
-  return `{${os.EOL}${stringsList.join('')}${nestingPushingCharacters}}`;
+  const closeBracketPushingCharacters = '    '.repeat(deepLevel - 1);
+  return `{${os.EOL}${stringsList.join('')}${closeBracketPushingCharacters}}`;
 };
 
 module.exports = { getDefaultReportDifference };
