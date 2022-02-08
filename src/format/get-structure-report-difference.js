@@ -8,4 +8,4 @@ const getStructureReportDifference = (report) => {
   return stableJSONStringify(report);
 };
 
-module.exports = getStructureReportDifference;
+module.exports = { getStructureReportDifference };

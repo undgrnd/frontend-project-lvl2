@@ -1,4 +1,4 @@
-const getDifference = require('../src/get-difference');
+const { getDifference } = require('../src/get-difference');
 
 const before = require('./__fixtures__/before-nesting.json');
 const after = require('./__fixtures__/after-nesting.json');

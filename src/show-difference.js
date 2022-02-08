@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
-const getDifference = require('./get-difference');
-const getDefaultReportDifference = require('./format/get-default-report-difference');
-const getPlainReportDifference = require('./format/get-plain-report-difference');
-const getStructureReportDifference = require('./format/get-structure-report-difference');
+const { getDifference } = require('./get-difference');
+const { getDefaultReportDifference } = require('./format/get-default-report-difference');
+const { getPlainReportDifference } = require('./format/get-plain-report-difference');
+const { getStructureReportDifference } = require('./format/get-structure-report-difference');
 
 const showDifference = (firstFilePath, secondFilePath, format) => {
   const filesExtension = [
@@ -26,23 +26,23 @@ const showDifference = (firstFilePath, secondFilePath, format) => {
   }
 
   if (format === 'plain') {
-    return process.stdout.write(getPlainReportDifference(getDifference(
+    return getPlainReportDifference(getDifference(
       firstFileContent,
       secondFileContent,
-    )));
+    ));
   }
 
   if (format === 'json') {
-    return process.stdout.write(getStructureReportDifference(getDifference(
+    return getStructureReportDifference(getDifference(
       firstFileContent,
       secondFileContent,
-    )));
+    ));
   }
 
-  return process.stdout.write(getDefaultReportDifference(getDifference(
+  return getDefaultReportDifference(getDifference(
     firstFileContent,
     secondFileContent,
-  )));
+  ));
 };
 
-module.exports = showDifference;
+module.exports = { showDifference };

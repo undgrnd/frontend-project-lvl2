@@ -2,17 +2,18 @@ const isEqual = require('lodash/isEqual');
 
 const { isObject } = require('./utils');
 
-const getAddedPropDescription = require('./description-creators/get-added-prop-description');
-const getDeletedPropDescription = require('./description-creators/get-deleted-prop-description');
-const getModifiedPropDescription = require('./description-creators/get-modified-prop-description');
-const getNotModifiedPropDescription = require('./description-creators/get-not-modified-prop-description');
-const getObjectModifiedPropDescription = require('./description-creators/get-object-modified-prop-description');
+const {
+  getAddedPropDescription,
+  getDeletedPropDescription,
+  getModifiedPropDescription,
+  getNotModifiedPropDescription,
+  getObjectModifiedPropDescription,
+} = require('./prop-actions-descriptions');
 
 const getDifference = (firstObject, secondObject) => {
   const firstObjectProps = Object.keys(firstObject);
   const secondObjectProps = Object.keys(secondObject);
 
-  // Prop was deleted
   const deletedProps = firstObjectProps
     .filter((firstObjectProp) => !Object.getOwnPropertyDescriptor(secondObject, firstObjectProp))
     .map((firstObjectProp) => getDeletedPropDescription(firstObject, firstObjectProp));
@@ -21,18 +22,22 @@ const getDifference = (firstObject, secondObject) => {
     const secondObjectPropValue = secondObject[secondObjectPropName];
     const firstObjectPropValue = firstObject[secondObjectPropName];
 
-    // Prop was added
-    if (!Object.getOwnPropertyDescriptor(firstObject, secondObjectPropName)) {
+    const isPropAdded = !Object.getOwnPropertyDescriptor(firstObject, secondObjectPropName);
+
+    if (isPropAdded) {
       return [...acc, getAddedPropDescription(secondObject, secondObjectPropName)];
     }
 
-    // Prop has not been changed
-    if (isEqual(secondObjectPropValue, firstObjectPropValue)) {
+    const isPropNotModified = isEqual(secondObjectPropValue, firstObjectPropValue);
+
+    if (isPropNotModified) {
       return [...acc, getNotModifiedPropDescription(secondObject, secondObjectPropName)];
     }
 
-    // Prop is modified object
-    if (isObject(secondObjectPropValue) && isObject(firstObjectPropValue)) {
+    const ifPropIsModifiedObject = isObject(secondObjectPropValue)
+      && isObject(firstObjectPropValue);
+
+    if (ifPropIsModifiedObject) {
       return [...acc,
         getObjectModifiedPropDescription(
           secondObjectPropName,
@@ -48,4 +53,4 @@ const getDifference = (firstObject, secondObject) => {
   }, deletedProps);
 };
 
-module.exports = getDifference;
+module.exports = { getDifference };

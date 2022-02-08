@@ -51,4 +51,4 @@ const getPlainReportDifference = (report) => {
   return stringsList.join(os.EOL);
 };
 
-module.exports = getPlainReportDifference;
+module.exports = { getPlainReportDifference };

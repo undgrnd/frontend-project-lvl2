@@ -2,7 +2,7 @@
 
 const program = require('commander');
 const packageJSON = require('../../package.json');
-const showDifference = require('../show-difference');
+const { genDiff } = require('../lib');
 
 const init = () => program
   .version(packageJSON.version)
@@ -10,7 +10,7 @@ const init = () => program
   .option('-f, --format [type]', 'output format')
   .arguments('<firstConfigPath> <secondConfigPath>')
   .action((firstFile, secondFile) => {
-    showDifference(firstFile, secondFile, program.opts().format);
+    process.stdout.write(genDiff(firstFile, secondFile, program.opts().format));
   })
   .parse(process.argv);
 

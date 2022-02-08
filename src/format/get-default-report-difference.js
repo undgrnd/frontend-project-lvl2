@@ -35,4 +35,4 @@ const getDefaultReportDifference = (report, deepLevel = 0) => {
   return `{${os.EOL}${stringsList.join('')}${nestingPushingCharacters}}`;
 };
 
-module.exports = getDefaultReportDifference;
+module.exports = { getDefaultReportDifference };

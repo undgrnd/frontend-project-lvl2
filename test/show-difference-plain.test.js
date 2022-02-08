@@ -1,5 +1,5 @@
-const getDifference = require('../src/get-difference');
-const getPlainReportDifference = require('../src/format/get-plain-report-difference');
+const { getDifference } = require('../src/get-difference');
+const { getPlainReportDifference } = require('../src/format/get-plain-report-difference');
 
 const before = require('./__fixtures__/before-nesting.json');
 const after = require('./__fixtures__/after-nesting.json');
