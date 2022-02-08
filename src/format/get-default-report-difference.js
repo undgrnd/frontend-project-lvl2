@@ -3,12 +3,12 @@ const os = require('os');
 const { isObject } = require('../utils');
 const { getActionSign } = require('./utils');
 
-const getDefaultReportDifference = (report, deepLevel = 0) => {
+const getDefaultReportDifference = (report, deepLevel = 1) => {
   if (!report) {
     return '';
   }
 
-  const nestingPushingCharacters = '  '.repeat(deepLevel);
+  const nestingPushingCharacters = '    '.repeat(deepLevel);
 
   const stringsList = report
     .filter((prop) => prop.action !== 'modified')

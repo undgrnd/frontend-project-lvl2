@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Get difference in nesting structures 1`] = `
+Array [
+  Object {
+    "action": "object modified",
+    "name": "common",
+    "value": Array [
+      Object {
+        "action": "added",
+        "name": "follow",
+        "value": false,
+      },
+      Object {
+        "action": "not modified",
+        "name": "setting1",
+        "value": "Value 1",
+      },
+      Object {
+        "action": "deleted",
+        "name": "setting2",
+        "value": 200,
+      },
+      Object {
+        "action": "deleted while modifying",
+        "name": "setting3",
+        "value": true,
+      },
+      Object {
+        "action": "added while modifying",
+        "name": "setting3",
+        "value": Object {
+          "key": "value",
+        },
+      },
+      Object {
+        "action": "modified",
+        "name": "setting3",
+        "oldValue": true,
+        "value": Object {
+          "key": "value",
+        },
+      },
+      Object {
+        "action": "added",
+        "name": "setting4",
+        "value": "blah blah",
+      },
+      Object {
+        "action": "added",
+        "name": "setting5",
+        "value": Object {
+          "key5": "value5",
+        },
+      },
+      Object {
+        "action": "object modified",
+        "name": "setting6",
+        "value": Array [
+          Object {
+            "action": "not modified",
+            "name": "key",
+            "value": "value",
+          },
+          Object {
+            "action": "added",
+            "name": "ops",
+            "value": "vops",
+          },
+        ],
+      },
+    ],
+  },
+  Object {
+    "action": "object modified",
+    "name": "group1",
+    "value": Array [
+      Object {
+        "action": "deleted while modifying",
+        "name": "baz",
+        "value": "bas",
+      },
+      Object {
+        "action": "added while modifying",
+        "name": "baz",
+        "value": "bars",
+      },
+      Object {
+        "action": "modified",
+        "name": "baz",
+        "oldValue": "bas",
+        "value": "bars",
+      },
+      Object {
+        "action": "not modified",
+        "name": "foo",
+        "value": "bar",
+      },
+      Object {
+        "action": "deleted while modifying",
+        "name": "nest",
+        "value": Object {
+          "key": "value",
+        },
+      },
+      Object {
+        "action": "added while modifying",
+        "name": "nest",
+        "value": "str",
+      },
+      Object {
+        "action": "modified",
+        "name": "nest",
+        "oldValue": Object {
+          "key": "value",
+        },
+        "value": "str",
+      },
+    ],
+  },
+  Object {
+    "action": "deleted",
+    "name": "group2",
+    "value": Object {
+      "abc": 12345,
+    },
+  },
+  Object {
+    "action": "added",
+    "name": "group3",
+    "value": Object {
+      "fee": 100500,
+    },
+  },
+]
+`;

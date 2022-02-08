@@ -5,6 +5,11 @@ const { isPrimitive } = require('../utils');
 
 const nonPrimitiveValueLiteral = '[complex value]';
 
+const getFormattedPropValue = (value) => {
+  const valueWithQuotesIfNeeded = typeof value === 'string' ? `'${value}'` : value;
+  return isPrimitive(value) ? valueWithQuotesIfNeeded : nonPrimitiveValueLiteral;
+};
+
 const getPlainReportDifference = (report) => {
   if (!report) {
     return '';
@@ -12,20 +17,14 @@ const getPlainReportDifference = (report) => {
 
   const stringsList = [];
 
-  // from: added, deleted, added while modifying,
-  // deleted while modifying, not modified, object modified
-
-  // to: added, deleted, modified
-
   const traverseTree = (tree, parentName) => {
     tree.forEach((prop) => {
       const createActionDescription = getActionDescription(prop.action);
-      const valueLiteral = isPrimitive(prop.value) ? prop.value : nonPrimitiveValueLiteral;
       const combinedName = parentName ? `${parentName}.${prop.name}` : prop.name;
 
       switch (prop.action) {
         case 'added': {
-          stringsList.push(createActionDescription(combinedName, valueLiteral));
+          stringsList.push(createActionDescription(combinedName, getFormattedPropValue(prop.value)));
           break;
         }
         case 'deleted': {
@@ -34,7 +33,7 @@ const getPlainReportDifference = (report) => {
         }
         case 'modified': {
           stringsList.push(createActionDescription(combinedName,
-            valueLiteral, isPrimitive(prop.oldValue) ? prop.oldValue : nonPrimitiveValueLiteral));
+            getFormattedPropValue(prop.value), getFormattedPropValue(prop.oldValue)));
           break;
         }
         case 'object modified': {

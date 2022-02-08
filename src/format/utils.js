@@ -23,13 +23,13 @@ const getActionSign = (action) => {
 const getActionDescription = (action) => {
   switch (action) {
     case 'added': {
-      return (key, value) => `Property ${key} was added with value: ${value}`;
+      return (key, value) => `Property '${key}' was added with value: ${value}`;
     }
     case 'deleted': {
-      return (key) => `Property ${key} was removed`;
+      return (key) => `Property '${key}' was removed`;
     }
     case 'modified': {
-      return (key, newValue, oldValue) => `Property ${key} was updated. From ${oldValue} to ${newValue}`;
+      return (key, newValue, oldValue) => `Property '${key}' was updated. From ${oldValue} to ${newValue}`;
     }
     default: {
       return ' ';

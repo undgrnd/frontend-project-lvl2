@@ -12,14 +12,14 @@ const getDeletedPropDescription = (before, propName) => ({
 
 const getModifiedPropDescription = (after, before, propName) => [
   {
-    action: 'added while modifying',
-    name: propName,
-    value: after[propName],
-  },
-  {
     action: 'deleted while modifying',
     name: propName,
     value: before[propName],
+  },
+  {
+    action: 'added while modifying',
+    name: propName,
+    value: after[propName],
   },
   {
     action: 'modified',
